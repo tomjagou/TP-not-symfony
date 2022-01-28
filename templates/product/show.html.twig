@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{{product.name}}
+{% endblock %}
+
+{% block body %}
+<style>
+    a {text-decoration: none}
+    table {border: medium solid #6495ed; border-collapse: collapse; width: 100%}
+    th {font-family: monospace; border: thin solid #6495ed; padding: 5px; background-color: #D0E3FA}
+    td {font-family: sans-serif; border: thin solid #6495ed; padding: 5px; text-align: center; background-color: #ffffff}
+</style>
+
+<h1>{{product.name}}</h1>
+
+<table>
+    <tr>
+            <th>Prix : {{product.price}}</th>
+    </tr>
+    <tr>
+            <th>Date de création : {{product.createdAt|date('d/m/Y')}}</th>
+    </tr>
+    <tr>
+            <td>{{product.description}}</td>
+    </tr>
+</table>
+
+</br>
+<a href="/product">Retour</a>
+<button onclick="addCart()">Ajouter au panier</button>
+
+<script>
+    function addCart() {
+        fetch("/cart/add/{{product.id}}")
+        .then((response) => {
+            document.querySelector('button').disabled = true;
+        });
+    }
+</script>
+
+{% endblock %} 

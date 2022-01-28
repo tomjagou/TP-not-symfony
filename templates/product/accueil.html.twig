@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<style>
+    a {text-decoration: none}
+    .nom {color: black}
+    table {border: medium solid #6495ed; border-collapse: collapse; width: 100%}
+    th {font-family: monospace; border: thin solid #6495ed; padding: 5px; background-color: #D0E3FA}
+    td {font-family: sans-serif; border: thin solid #6495ed; padding: 5px; text-align: center; background-color: #ffffff}
+    div {display: flex}
+    table {margin: 1%}
+</style>
+
+<div>
+    <table>
+        <tr>
+            <th colspan="4">
+                <h1>Nos produits au prix le plus bas !</h1>
+            </th>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Date</th>
+            <th>Description</th>
+        </tr>
+        {% for product in moinscher %}
+            <tr>
+                <td><a class="nom" href="{{ path('product.show', {id : product.id}) }}">{{ product.name }}</a></td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.createdAt|date('d/m/Y') }}</td>
+                <td>{{ product.description|slice(0,300) }} <a href="{{ path('product.show', {id : product.id}) }}">...voir plus</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <table>
+        <tr>
+            <th colspan="4">
+                <h1>Nos produits récents !</h1>
+            </th>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Date</th>
+            <th>Description</th>
+        </tr>
+        {% for product in plusrecent %}
+            <tr>
+                <td><a class="nom" href="{{ path('product.show', {id : product.id}) }}">{{ product.name }}</a></td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.createdAt|date('d/m/Y') }}</td>
+                <td>{{ product.description|slice(0,300) }} <a href="{{ path('product.show', {id : product.id}) }}">...voir plus</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

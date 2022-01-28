@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }}
+    .nom {color: black}
+    a {text-decoration: none}
+    table {border: medium solid #6495ed; border-collapse: collapse; width: 100%}
+    th {font-family: monospace; border: thin solid #6495ed; padding: 5px; background-color: #D0E3FA}
+    td {font-family: sans-serif; border: thin solid #6495ed; padding: 5px; text-align: center; background-color: #ffffff}
+</style>
+
+
+<h1>Liste des produits</h1>
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Date de création</th>
+        <th>Description du produit</th>
+    </tr>
+
+{% for product in list_products %}
+    <tr>
+        <td><a class="nom" href="{{path('product.show',{id:product.id})}}">{{product.name}}</a></td>
+        <td>{{product.price}}</td>
+        <td>{{product.createdAt|date('d/m/Y')}}</td>
+        <td>{{product.description|slice(0,300)}}<a href="{{path('product.show',{id:product.id})}}">...plus</a></td>
+    </tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}
